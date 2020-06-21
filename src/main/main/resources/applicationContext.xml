@@ -43,10 +43,6 @@
 <!--        </aop:aspect>-->
 <!--    </aop:config>-->
 
-    <!-- 切点   execution()-->
-    <!--    * *.*(..)-->
-    <!--    gogo org.spoto.DemoServiceImpl.dodo(.....)-->
-
     <!-- 阿里 druid 数据库连接池 -->
     <bean id = "dataSource" class = "com.alibaba.druid.pool.DruidDataSource" init-method="init" destroy-method = "close" >
         <!-- 数据库基本信息配置 -->
