@@ -38,30 +38,24 @@
                 <div class="layui-card-body ">
                     <form action="/selectAllCards" method="post" class="layui-form layui-col-space5">
                         <div class="layui-inline layui-show-xs-block">
-                            <input class="layui-input"  autocomplete="off" placeholder="开始日" name="start" id="start">
+                            <%--                            <input type="text" name="username"  placeholder="请输入卡号" autocomplete="off" class="layui-input">--%>
                         </div>
-                        <div class="layui-inline layui-show-xs-block">
-                            <input class="layui-input"  autocomplete="off" placeholder="截止日" name="end" id="end">
-                        </div>
-                        <div class="layui-inline layui-show-xs-block">
-                            <input type="text" name="username"  placeholder="请输入用户名" autocomplete="off" class="layui-input">
-                        </div>
-                        <div class="layui-inline layui-show-xs-block">
-                            <button type="submit" class="layui-btn"  lay-submit="" lay-filter="sreach"><i class="layui-icon">&#xe615;</i></button>
+                        <div>
+                            <button type="submit" class="layui-btn"  lay-submit="" lay-filter="sreach"><i class="layui-icon">&#xe615;</i>显示卡号</button>
                         </div>
                     </form>
                 </div>
                 <div class="layui-card-header">
-                    <button class="layui-btn layui-btn-danger" onclick="delAll()"><i class="layui-icon"></i>批量删除</button>
+<%--                    <button class="layui-btn layui-btn-danger" onclick="delAll()"><i class="layui-icon"></i>批量删除</button>--%>
                     <button class="layui-btn" onclick="xadmin.open('添加用户','./cards-list-add.jsp',600,400)"><i class="layui-icon"></i>添加</button>
                 </div>
                 <div class="layui-card-body layui-table-body layui-table-main">
                     <table class="layui-table layui-form">
                         <thead>
                         <tr>
-<%--                            <th>--%>
-<%--                                <input type="checkbox" lay-filter="checkall" name="" lay-skin="primary">--%>
-<%--                            </th>--%>
+                            <%--                            <th>--%>
+                            <%--                                <input type="checkbox" lay-filter="checkall" name="" lay-skin="primary">--%>
+                            <%--                            </th>--%>
                             <th>ID</th>
                             <th>卡号</th>
                             <th>体检人</th>
@@ -72,25 +66,27 @@
                             <th>金额</th>
                             <th>套餐</th>
                             <th>项目</th>
+                            <th>是否结算</th>
                         </tr>
                         </thead>
                         <tbody>
                         <c:forEach items="${list}" var="ca">
-                        <tr>
-<%--                            <td>--%>
-<%--                                <input type="checkbox" name="id" value="1"   lay-skin="primary">--%>
-<%--                            </td>--%>
-                            <td>${ca.cid}</td>
-                            <td>${ca.cardsid}</td>
-                            <td>${ca.cname}</td>
-                            <td><fmt:formatDate value="${ca.cdate}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
-                            <td>${ca.sex}</td>
-                            <td>${ca.age}</td>
-                            <td>${ca.telephone}</td>
-                            <td>${ca.cprice}</td>
-                            <td>${ca.teid}</td>
-                            <td>${ca.prid}</td>
-                        </tr>
+                            <tr>
+                                    <%--                            <td>--%>
+                                    <%--                                <input type="checkbox" name="id" value="1"   lay-skin="primary">--%>
+                                    <%--                            </td>--%>
+                                <td>${ca.cid}</td>
+                                <td>${ca.cardsid}</td>
+                                <td>${ca.cname}</td>
+                                <td>${ca.cdate}</td>
+                                <td>${ca.sex}</td>
+                                <td>${ca.age}</td>
+                                <td>${ca.telephone}</td>
+                                <td>${ca.cprice}</td>
+                                <td>${ca.teid}</td>
+                                <td>${ca.prid}</td>
+                                <td>${ca.state}</td>
+                            </tr>
                         </c:forEach>
                         </tbody>
                     </table>

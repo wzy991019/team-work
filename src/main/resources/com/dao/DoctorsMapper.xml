@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!--dao实现类(impl)配置文件-->
+<mapper namespace="com.dao.DoctorsMapper" >
+    <select id="selectOfficeByPrid" parameterType="String" resultType="com.model.vo.Office">
+        SELECT c.prid,c.cid,c.cardsid,c.cname,c.sex,c.age,c.telephone,f.finame,f.ficonsult,r.room,u.uname
+        FROM cards c,fine f,rooms r,users u
+        where c.prid=f.prid and r.prid=f.prid and u.prid=f.prid and c.prid=#{prid}
+    </select>
+    <select id="selectOfficeByNameOrCardId1" parameterType="String" resultType="com.model.vo.Office">
+        SELECT c.prid,c.cid,c.cardsid,c.cname,c.sex,c.age,c.telephone,f.finame,f.ficonsult,r.room,u.uname
+        FROM cards c,fine f,rooms r,users u
+        <where>
+            c.prid=f.prid and r.prid=f.prid and u.prid=f.prid and c.prid=01
+            and (c.cardsid=#{word} or c.cname=#{word})
+        </where>
+    </select>
+    <select id="selectOfficeByNameOrCardId2" parameterType="String" resultType="com.model.vo.Office">
+        SELECT c.prid,c.cid,c.cardsid,c.cname,c.sex,c.age,c.telephone,f.finame,f.ficonsult,r.room,u.uname
+        FROM cards c,fine f,rooms r,users u
+        <where>
+            c.prid=f.prid and r.prid=f.prid and u.prid=f.prid and c.prid=02
+            and (c.cardsid=#{word} or c.cname=#{word})
+        </where>
+    </select>
+    <select id="selectOfficeByNameOrCardId3" parameterType="String" resultType="com.model.vo.Office">
+        SELECT c.prid,c.cid,c.cardsid,c.cname,c.sex,c.age,c.telephone,f.finame,f.ficonsult,r.room,u.uname
+        FROM cards c,fine f,rooms r,users u
+        <where>
+            c.prid=f.prid and r.prid=f.prid and u.prid=f.prid and c.prid=03
+            and (c.cardsid=#{word} or c.cname=#{word})
+        </where>
+    </select>
+    <select id="selectOfficeByNameOrCardId4" parameterType="String" resultType="com.model.vo.Office">
+        SELECT c.prid,c.cid,c.cardsid,c.cname,c.sex,c.age,c.telephone,f.finame,f.ficonsult,r.room,u.uname
+        FROM cards c,fine f,rooms r,users u
+        <where>
+            c.prid=f.prid and r.prid=f.prid and u.prid=f.prid and c.prid=04
+            and (c.cardsid=#{word} or c.cname=#{word})
+        </where>
+    </select>
+    <insert id="insertPatients" parameterType="com.model.Patients">
+        insert into patients(prid, cid, bname, finame, uname, bresult) values (#{prid},#{cid},#{bname},#{finame},#{uname},#{bresult})
+    </insert>
+    <select id="selectResult" resultType="com.model.vo.Result">
+        select * from result
+    </select>
+    <insert id="insertResult" parameterType="com.model.vo.Result">
+        insert into result(rresult, prid, cid, cname, uname) VALUES (#{rresult},#{prid},#{cid},#{cname},#{uname})
+    </insert>
+</mapper>

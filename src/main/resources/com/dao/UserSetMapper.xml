@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!--dao实现类(impl)配置文件-->
+<mapper namespace="com.dao.UserSetMapper" >
+
+    <select id="showUserInfo" parameterType="java.lang.String" resultType="com.model.User">
+        select * from users where uname=#{username}
+    </select>
+
+
+    <select id="queryUser"  resultType="com.model.User">
+        select * from users where 1=1
+        <if test="param1 != null">
+            and ${param1} = #{param2}
+        </if>
+    </select>
+</mapper>
+
+
+    <!--    查找用户信息-->
+<!--    <select id="FindUserByunameAndupwd" resultType="com.pojo.Users">-->
+<!--        SELECT * FROM users-->
+<!--        <where>-->
+<!--            <if test="uname!=null and uname!=''" >-->
+<!--                and  uname=#{uname}-->
+<!--            </if>-->
+<!--            <if test="upwd!=null">-->
+<!--                and upwd=#{upwd}-->
+<!--            </if>-->
+<!--        </where>-->
+<!--    </select>-->
+
+    <!--    查找用户信息-->
+    <!--    <select id="" >-->
+    <!--         -->
+    <!--    </select>-->
+
+    <!--新增用户-->
+<!--    <insert id="AddUser">-->
+<!--        INSERT INTO users VALUES (null,#{uname},#{upwd},#{uage},#{udate},#{majorid})-->
+<!--    </insert>-->
+
+    <!--    删除用户信息、根据用户id序号-->
+<!--    <delete id="DeleteUser">-->
+<!--        DELETE FROM users WHERE  uid in(-->
+<!--        <foreach collection="uid" item="id" separator=",">-->
+<!--            #{id}-->
+<!--        </foreach>-->
+<!--        );-->
+<!--    </delete>-->
+
+    <!--    利用表链接查找用户信息-->
+<!--    <select id="SelectUserAndMajor" resultMap="um">-->
+<!--        SELECT-->
+<!--        us.uname,us.upwd,us.uage,us.udate,-->
+<!--        ma.major-->
+<!--        from users us-->
+<!--        LEFT JOIN major ma ON us.majorid=ma.majorid-->
+<!--        <where>-->
+<!--            <if test="uid!=null">-->
+<!--                us.uid=#{uid}-->
+<!--            </if>-->
+<!--        </where>-->
+
+<!--    </select>-->
+
+<!--    <resultMap id="um" type="com.dto.MajAndUs">-->
+<!--        <result column="major" property="maj.major"></result>-->
+<!--    </resultMap>-->
+
+    <!--    <resultMap id="userResultMap" type="com.pojo.Reg">-->
+    <!--        <result column="reg_id" property="regid"></result>-->
+    <!--    </resultMap>-->
+

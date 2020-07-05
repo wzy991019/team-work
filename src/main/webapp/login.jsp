@@ -21,6 +21,7 @@
             background: url("images/bg.png") no-repeat;
             background-size: 100% 100%  ;
         }
+        /*#sub{background-color: darkgray}*/
     </style>
 </head>
 <body class="login-bg">
@@ -30,17 +31,17 @@
     <div id="darkbannerwrap"></div>
 
     <form method="post" class="layui-form" action="${pageContext.request.contextPath}/login" >
-        <input name="uname" onblur="isName()" id="username" placeholder="用户名"  type="text" lay-verify="required" class="layui-input" required >
+        <input name="uname" onblur="isName()" onchange="checkUserStatus(this.value)" id="username" placeholder="请输入用户名"  type="text" lay-verify="required" class="layui-input" required ><span id="sp1"></span>
         <hr class="hr15">
-        <input name="upwd" id="password" onblur="isPwd()" lay-verify="required" placeholder="密码"  type="password" class="layui-input" required>
+        <input name="upwd" id="password" onblur="isPwd()" lay-verify="required" placeholder="请输入密码"  type="password" class="layui-input" required>
         <hr class="hr15">
-        <input value="登录" lay-submit lay-filter="login" style="width:100%;" type="submit">
+        <input value="登录" lay-submit lay-filter="login" style="width:100%;" type="submit" id="sub">
         <hr class="hr20" >
     </form>
-<%--    <form method="post" action="${pageContext.request.contextPath}/toRegister">--%>
-<%--        <input value="注册" lay-submit lay-filter="login" style="width:100%;color: black;background-color: red" type="submit">--%>
-<%--        <hr class="hr20" >--%>
-<%--    </form>--%>
+    <form method="post" action="${pageContext.request.contextPath}/toRegister">
+        <input value="注册" lay-submit lay-filter="login" style="width:100%;color: black;background-color: red" type="submit">
+        <hr class="hr20" >
+    </form>
 </div>
 
 </body>
@@ -49,7 +50,7 @@
     function isName() {
         var username = $("#username").val();
         $.ajax({
-            url:"isUsername",
+            url:"${pageContext.request.contextPath}/isUsername",
             data:{"username":username},
             success:function (data) {
                 if(data == "false"){
@@ -58,19 +59,52 @@
             }
         })
     }
-    function isPwd() {
-        var username = $("#username").val();
-        var password = $("#password").val();
-        $.ajax({
-            url:"isPassword",
-            data:{"username":username,"password":password},
-            success:function (data) {
-                if(data == "false"){
-                    alert("密码输入错误！请重新输入！");
-                    $("#password").val(" ");
+    // function isPwd() {
+    //     var username = $("#username").val();
+    //     var password = $("#password").val();
+    //     $.ajax({
+    //         url:"isPassword",
+    //         data:{"username":username,"password":password},
+    //         success:function (data) {
+    //             if(data == "false"){
+    //                 alert("密码输入错误！请重新输入！");
+    //                 $("#password").val(" ");
+    //             }
+    //         }
+    //     })
+    // }
+
+    // 判断账号的状态：启用或禁用
+    function checkUserStatus(userName) {
+
+        $.ajax(
+            {
+                type:"post",
+                url:"${pageContext.request.contextPath}/checkUserStatus",
+                data:{uname:userName},
+                cache:false,
+                success:function (data) {
+
+                    if(data=="false"){
+                        $("#sp1").html("禁用");
+                        $("#password").attr("placeholder","禁止输入密码");
+                        $("#password").attr("disabled","disabled");
+                        $("#sub").val("禁止登录");
+                        $("#sub").css("background","darkgray");
+                        $("#sub").attr("disabled","true");
+                    }else{
+                        $("#sp1").html("正常");
+                        $("#password").removeAttr("disabled","disabled");
+                        $("#password").attr("placeholder","请输入密码");
+                        $("#sub").removeAttr("disabled","true");
+                        $("#sub").val("登录");
+                        $("#sub").css("background","#189f92");
+
+                    }
                 }
             }
-        })
+        )
+
     }
 </script>
 </html>
